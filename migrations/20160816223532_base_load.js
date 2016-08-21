@@ -1,6 +1,12 @@
 
 exports.up = function(knex, Promise) {
   return PromiseAll([
+    // CREATE ROLES TABLE
+    knex.schema.createTable('roles', (table) => {
+      table.increments();
+      table.string('role').notNullable();
+      table.string('description');
+    }),
     // CREATE USERS TABLE
     knex.schema.createTable('users', (table) => {
       table.increments();
@@ -11,7 +17,7 @@ exports.up = function(knex, Promise) {
       table.string('firstname');
       table.string('lastname');
       table.string('phoneNumber');
-    })
+    }),
     // CREATE BOOKS TABLE
 
     // CREATE AUTHORS TABLE
@@ -23,5 +29,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-
+  knex.raw('drop table if exists roles cascade'),
 };
