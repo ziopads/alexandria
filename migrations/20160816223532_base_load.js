@@ -27,19 +27,29 @@ exports.up = function(knex, Promise) {
     }),
     // CREATE AUTHORS TABLE
     knex.schema.createTable('authors', (table) => {
-
+      table.increments();
+      table.string('firstname');
+      table.string('lastname');
+      table.text('bio');
+      table.string('portraiturl');
     })
     // CREATE GENRES TABLE
     knex.schema.createTable('genres', (table) => {
-
+      table.increments();
+      table.string('genrename').notNullable();
+      table.text('genredescription');
     })
     // CREATE BOOKS_AUTHORS TABLE
     knex.schema.createTable('books_authors', (table) => {
-
+      table.increments();
+      table.integer('author_id').references('id').inTable('authors');
+      table.integer('book_id').references('id').inTable('books');
     })
     // CREATE BOOKS_GENRES TABLE
     knex.schema.createTable('books_genres', (table) => {
-
+      table.increments();
+      table.integer('genre_id').references('id').inTable('genres');
+      table.integer('book_id').references('id').inTable('books');
     })
   ])
 };
