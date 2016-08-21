@@ -19,12 +19,28 @@ exports.up = function(knex, Promise) {
       table.string('phoneNumber');
     }),
     // CREATE BOOKS TABLE
-
+    knex.schema.createTable('books', (table) => {
+      table.increments();
+      table.string('title').notNullable();
+      table.text('description');
+      table.string('bookcoverurl');
+    }),
     // CREATE AUTHORS TABLE
-    // CREATE GENRES TABLE
-    // CREATE BOOKS_AUTHORS TABLE
-    // CREATE BOOKS_GENRES TABLE
+    knex.schema.createTable('authors', (table) => {
 
+    })
+    // CREATE GENRES TABLE
+    knex.schema.createTable('genres', (table) => {
+
+    })
+    // CREATE BOOKS_AUTHORS TABLE
+    knex.schema.createTable('books_authors', (table) => {
+
+    })
+    // CREATE BOOKS_GENRES TABLE
+    knex.schema.createTable('books_genres', (table) => {
+
+    })
   ])
 };
 
